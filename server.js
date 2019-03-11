@@ -1,14 +1,30 @@
-// 注意：生产环境上必须配置环境变量NODE_ENV = 'production'，而开发环境不需要配置，实际上NODE_ENV可能是undefined，所以判断的时候，不要用NODE_ENV === 'development'。
-// process.env.NODE_ENV = 'production';
-const isProduction = process.env.NODE_ENV === 'production';
-
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
+const Config = require('./config');
+const onerror = require('koa-error');
+const koaWebpack = require('koa-webpack');
 const controller = require('./controller');
 const templating = require('./templating');
+const webpackDevConf = require('./build/webpack.dev.conf');
+// 注意：生产环境上必须配置环境变量NODE_ENV = 'production'，而开发环境不需要配置，实际上NODE_ENV可能是undefined，所以判断的时候，不要用NODE_ENV === 'development'。
+// process.env.NODE_ENV = 'production';
+const isProduction = process.env.NODE_ENV === 'development';
 var app = new Koa();
 
-// 记录URL以及页面执行时间：
+
+onerror(app); //错误信息处理
+
+
+
+// 开发环境用webpack编译和热加载插件
+const options = {
+  config: webpackDevConf,
+};
+app.use(async (ctx, next) => {
+  await koaWebpack(options);
+});
+
+// 控制台打印URL以及页面执行时间：
 app.use(async (ctx, next) => {
   var
     start = new Date().getTime(),
@@ -43,11 +59,11 @@ app.use(templating('views', {
 // app.use(Router);
 app.use(controller('user')); //   controllers/user
 app.use(controller('userFavorites'));
-app.use(controller('favorites')); 
+app.use(controller('favorites'));
 app.use(controller('favoritesSite'));
 app.use(controller('site'));
 app.use(controller()); //   controllers
 
 
-app.listen(3000);
-console.log('app started at port 3000...');
+app.listen(Config.node.port);
+console.log('app started at port ' + Config.node.port + '...');
