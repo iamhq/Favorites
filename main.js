@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import App from './views/app.vue';
+// import Vue from 'vue';
+// import App from './views/app.vue';
 
-new Vue({
-  el: '#app',
-  render: h=> h(App)
-});
+// new Vue({
+//   el: '#app',
+//   render: h=> h(App)
+// });
 
-console.log('main,,,,')
+// console.log('main,,,,')

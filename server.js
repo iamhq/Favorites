@@ -17,12 +17,12 @@ onerror(app); //错误信息处理
 
 
 // 开发环境用webpack编译和热加载插件
-const options = {
-  config: webpackDevConf,
-};
-app.use(async (ctx, next) => {
-  await koaWebpack(options);
-});
+// const options = {
+//   config: webpackDevConf,
+// };
+// app.use(async (ctx, next) => {
+//   await koaWebpack(options);
+// });
 
 // 控制台打印URL以及页面执行时间：
 app.use(async (ctx, next) => {

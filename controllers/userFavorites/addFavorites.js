@@ -15,7 +15,8 @@ function addFavorites(username, favorites) {
                 // _id: _id
                 username: username
             }).exec(function (err, doc) {
-                let array = doc.favorites;
+                let array = [];
+                array = doc.favorites;
                 array.push(f._id);
 
                 doc.updateOne({
@@ -40,9 +41,10 @@ module.exports = {
         let username = ctx.request.body.username;
         let favorites = {
             _id: new mongoose.Types.ObjectId(),
-            name: ctx.request.body.favorites.name,
+            name: ctx.request.body.name,
             sites: [],
         }
+        console.log('favorites............',favorites);
 
         await addFavorites(username, favorites).then(
             () => {

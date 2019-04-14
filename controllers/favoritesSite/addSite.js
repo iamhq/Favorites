@@ -36,7 +36,7 @@ function addSite(favoritesID, site) {
 
 module.exports = {
     'POST /fs/addSite': async (ctx, next) => {
-        let site = ctx.request.body.site;
+        let site = ctx.request.body;
         let favoritesID = ctx.request.body.favoritesID;
         site._id = new mongoose.Types.ObjectId();
 

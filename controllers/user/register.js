@@ -44,11 +44,11 @@ module.exports = {
         let nickname = ctx.request.body.nickname || '';
 
         if (name === '' || pass === '' || nickname === '') {
-            ctx.render('index.html', {
-                title: 'home',
+            ctx.body = {
                 code: 201,
-                msg: '用户信息不能为空'
-            });
+                // msg: '注册失败，请重新注册',
+                msg: '注册失败，请重新注册' 
+            }
             return false;
         }
 
