@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
+const path = require('path')
 const Config = require('./config/config');
 const onerror = require('koa-error');
 var model = require('./model');
@@ -26,7 +27,8 @@ app.use(async (ctx, next) => {
 //处理静态文件：
 if (!isProduction) {
   let staticFiles = require('./static-files');
-  app.use(staticFiles('/static/', __dirname + '/static'));
+  app.use(staticFiles('/dist/', path.resolve(__dirname, '../dist')));
+  app.use(staticFiles('/assets/', path.resolve(__dirname, '../assets')));
 }
 
 // 解析POST请求：,响应json

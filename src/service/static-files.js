@@ -12,6 +12,7 @@ function staticFiles(url, dir) {
         if (rpath.startsWith(url)) {
             // 获取文件完整路径:
             let fp = path.join(dir, rpath.substring(url.length));
+            console.log('fp..', fp)
             // 判断文件是否存在:
             if (await fs.exists(fp)) {
                 // 查找文件的mime:
