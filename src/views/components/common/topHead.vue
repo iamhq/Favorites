@@ -1,7 +1,6 @@
 <template>
     <div class="relative" id="header">
         <img class="header-logo" src="/assets/images/logo.png">
-        <img class="header-logo" src="/assets/images/logo.png">
         <nav id="header-nav"></nav>
     </div>
 </template>
@@ -22,7 +21,7 @@ export default {
 
 #header {
     margin: 0 auto;
-    height: 80px;
+    height: 50px;
 
     color: #fff;
 }
@@ -30,10 +29,10 @@ export default {
 .header-logo {
     position: absolute;
     left: 20px;
-    top: 0;
+    top: 5px;
 
-    width: 80px;
-    height: 80px;
+    width: 45px;
+    height: 45px;
 }
 
 #header-nav {

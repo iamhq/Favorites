@@ -27,7 +27,7 @@ module.exports = {
     devServer: {
         index: "index.html",
         publicPath: "/",
-        contentBase: path.join(__dirname, "src")
+        contentBase: path.join(__dirname, "../")
     },
     module: {
         rules: [
@@ -44,13 +44,8 @@ module.exports = {
                 }
             },
             { //页面中import css文件打包需要用到
-                test: /\.css/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader'],
-                    publicPath: "../",
-
-                })
+                test:/\.css$/,
+                use:["vue-style-loader","css-loader"]
             },
             {
                 test: /\.js$/,

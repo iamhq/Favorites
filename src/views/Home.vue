@@ -31,11 +31,6 @@ html,body {
     height: 100%;
 }
 
-#app {
-    margin: 0 auto;
-    max-width: 1400px;
-    min-height: 100%;
-}
 .relative {
     position: relative;
 }
