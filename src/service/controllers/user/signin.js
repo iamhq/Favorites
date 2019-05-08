@@ -14,7 +14,7 @@ function check(username, pass) {
                 reject(err);
             }
             if (data && data.username == username && data.password == pass) {
-                resolve(true);
+                resolve(data);
             } else {
                 resolve(false);
             }
@@ -27,36 +27,37 @@ module.exports = {
         let username = ctx.request.body.username || '';
         let pass = ctx.request.body.password || '';
         if (username === '' || pass === '') {
-            ctx.render('index.html', {
-                title: 'home',
+            
+            ctx.body = {
                 code: 201,
-                msg: '请输入用户名和密码'
-            });
+                msg: '请输入用户名和密码' 
+            }
             return false;
         }
 
         await check(username, pass).then(
             res => {
                 if (res) {
-                    ctx.render('user.html', {
+                    ctx.body = {
                         code: 200,
                         user: {
-                            username: username
+                            username: username,
+                            nickname: res.nickname
                         }
-                    });
+                    };
                 } else {
-                    ctx.render('index.html', {
+                    ctx.body =  {
+                        code: 202,
                         title: 'home',
                         msg: '账号或密码错误'
-                    });
+                    };
                 }
             },
-            () => {
-                ctx.render('index.html', {
-                    title: 'home',
+            (err) => {
+                ctx.body =  {
                     code: 203,
-                    msg: '用户不存在'
-                });
+                    msg: '用户不存在'+err
+                };
             }
         )
     }

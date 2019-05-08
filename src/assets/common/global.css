@@ -1,0 +1,60 @@
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #191919;
+}
+
+a{
+  color: inherit;
+}
+
+.relative {
+  position: relative;
+}
+
+.blue-bg {
+  background: #0e60ff;
+}
+
+.black-bg {
+  background: #191919;
+}
+
+.fs-0 {
+  font-size: 0;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.margin-top15 {
+  margin-top: 15px;
+}
+
+/* 登录按钮样式 */
+#siginin-btn {
+  width: 300px;
+}
+
+/*  */
+.ivu-menu-item {
+  color: #fff !important;
+}
+
+.ivu-menu-item-active, .ivu-menu-item-active a {
+  color: #57aaf3 !important;
+}

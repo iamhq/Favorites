@@ -1,42 +1,36 @@
 <template>
   <div id="home">
-      <topHead></topHead>
+    hhhhhome
   </div>
 </template>
 <script>
-import topHead from './components/common/topHead.vue'
+
 export default {
-    name: 'home',
-    data(){
-        return{
-            test:213123,
-        }
-    },
-    components: {
-        topHead
-    }
-}
+  name: "home",
+  data() {
+    return {
+      test: 213123
+    };
+  },
+  components: {
+   
+  },
+  created: function() {
+      let params = JSON.stringify({
+      title: "2222",
+      url: "https://github.com/Tang-Seng/Favorites",
+      favoritesID: "5cb2c5905f8d253790dff3c8"
+    })
+    this.$http.post("http://localhost:3011/fs/addSite", params).then(
+      response => {
+        //成功处理
+        console.log("success: ", response);
+      },
+      reject => {
+        //失败处理
+        console.log("failllll: ", reject);
+      }
+    );
+  }
+};
 </script>
-
-<style>
-ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-html,body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-.relative {
-    position: relative;
-}
-
-.blue-bg {
-    background: #0E60FF;
-}
-</style>
-

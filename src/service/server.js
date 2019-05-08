@@ -40,6 +40,18 @@ app.use(bodyParser());
 // add controllers:
 // 处理URL路由：
 // app.use(Router);
+app.use(async (ctx, next) => {
+  if (ctx.method === 'OPTIONS') {
+    ctx.body = '';
+  }
+  await next();
+});
+app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Origin', 'http://localhost:3012');
+  ctx.set('Access-Control-Allow-Methods', 'PUT,DELETE,POST,GET');
+  ctx.set("Access-Control-Allow-Headers", "x-requested-with, accept, origin, content-type");
+  await next();
+});
 app.use(controller('user')); //   controllers/user
 app.use(controller('userFavorites'));
 app.use(controller('favorites'));

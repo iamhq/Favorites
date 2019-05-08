@@ -1,11 +1,12 @@
 {
   "scripts": {
     "start": "node app.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config src/build/webpack.dev.conf.js --port 3011 --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config src/build/webpack.dev.conf.js --port 3012 --hot",
     "webpack": "webpack --config src/build/webpack.dev.conf.js"
   },
   "dependencies": {
     "@babel/core": "^7.4.3",
+    "axios": "^0.18.0",
     "css-loader": "^2.1.1",
     "ee-first": "^1.1.1",
     "glob-base": "^0.3.0",
@@ -13,6 +14,7 @@
     "is-equal-shallow": "^0.1.3",
     "is-primitive": "^3.0.1",
     "isobject": "^3.0.1",
+    "iview": "^3.4.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "3.2.0",
     "koa-error": "^3.2.0",
@@ -35,6 +37,7 @@
     "to-regex": "^3.0.2",
     "unpipe": "^1.0.0",
     "vue": "^2.1.4",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

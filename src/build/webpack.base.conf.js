@@ -37,15 +37,15 @@ module.exports = {
                 options: {
                     loaders: {
                         css: ExtractTextPlugin.extract({
-                            use: 'css-loader',
+                            use: 'css-loader vue-style-loader',
                             fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
                         })
                     }
                 }
             },
-            { //页面中import css文件打包需要用到
-                test:/\.css$/,
-                use:["vue-style-loader","css-loader"]
+            {
+                test: /\.css$/,
+                use: ["vue-style-loader", "css-loader"],
             },
             {
                 test: /\.js$/,
@@ -58,7 +58,13 @@ module.exports = {
                 // loader: "file-loader",
                 use: 'url-loader?limit=8192&context=assets&name=[path][name].[ext]',
                 exclude: /node_modules/
-            }]
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/, //字体文件
+                loader: 'url-loader?limit=100000', //使用url-loader处理
+            }
+        ],
+
     },
     plugins: [
         new HtmlWebpackPlugin({

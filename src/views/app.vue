@@ -1,36 +1,32 @@
 <template>
-    <div id="app">
-        <router-view/>
-    </div>
+  <div id="app-con">
+    <topHead></topHead>
+    <router-view/>
+  </div>
 </template>
 
 <script>
+import topHead from "./components/common/topHead.vue";
+
 export default {
-    name: 'app',
-    data(){
-        return{
-            test:213123,
-        }
-    }
-}
+  name: "app",
+  data() {
+    return {
+      test: 213123
+    };
+  },
+  components: {
+    topHead
+  }
+};
 </script>
+
 <style scoped>
-ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-html,body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-#app {
-    margin: 0 auto;
-    max-width: 1400px;
-    min-height: 100%;
+#app-con {
+  margin: 0 auto;
+  min-width: 1200px;
+  min-height: 100%;
 }
 </style>
+
 
