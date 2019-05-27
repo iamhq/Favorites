@@ -1,6 +1,6 @@
-// sign in:
+
 /**
- * 
+ *用户登录 
  */
 const model = require('../../model');
 const UserModel = model.UserModel;
@@ -42,7 +42,8 @@ module.exports = {
                         code: 200,
                         user: {
                             username: username,
-                            nickname: res.nickname
+                            nickname: res.nickname,
+                            avatar: res.avatar
                         }
                     };
                 } else {

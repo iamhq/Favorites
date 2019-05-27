@@ -2,10 +2,10 @@ const model = require('../../model');
 const FavoritesModel = model.FavoritesModel;
 const SiteModel = model.SiteModel;
 
-function deleteSite(favoritesID, siteID) {
+function deleteSite(favoriteID, siteID) {
     return new Promise((resolve, reject) => {
         FavoritesModel.findOne({
-            _id: favoritesID
+            _id: favoriteID
         }, function (err, doc) {
             let array = doc.sites;
             let i = array.findIndex((f) => f == siteID)
@@ -40,9 +40,9 @@ function deleteSite(favoritesID, siteID) {
 module.exports = {
     'POST /fs/deleteSite': async (ctx, next) => {
         let siteID = ctx.request.body.siteID;
-        let favoritesID = ctx.request.body.favoritesID;
+        let favoriteID = ctx.request.body.favoriteID;
 
-        await deleteSite(favoritesID, siteID).then(
+        await deleteSite(favoriteID, siteID).then(
             (data) => {
                 ctx.body = {
                     code: 200,

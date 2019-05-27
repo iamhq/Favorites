@@ -56,9 +56,10 @@ module.exports = {
             {
                 test: /\.png$|\.jpg$|\.gif$|\.ico$/,
                 // loader: "file-loader",
-                use: 'url-loader?limit=8192&context=assets&name=[path][name].[ext]',
+                use: 'url-loader?limit=8192',
                 exclude: /node_modules/
             },
+            
             {
                 test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/, //字体文件
                 loader: 'url-loader?limit=100000', //使用url-loader处理

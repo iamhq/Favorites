@@ -14,7 +14,7 @@ function addSite(favoritesID, site) {
             FavoritesModel.findOne({
                 _id: favoritesID
             }).exec(function (err, doc) {
-                let array = doc.sites;
+                let array = doc.sites || [];
                 array.push(s._id);
 
                 doc.updateOne({
@@ -23,7 +23,7 @@ function addSite(favoritesID, site) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve();
+                        resolve(doc);
                     }
                 });
 
@@ -37,14 +37,18 @@ function addSite(favoritesID, site) {
 module.exports = {
     'POST /fs/addSite': async (ctx, next) => {
         let site = ctx.request.body;
-        let favoritesID = ctx.request.body.favoritesID;
+        let favoritesID = ctx.request.body.favoriteID;
+        site.user_id = ctx.request.body.user_id;
+        site.avatar = ctx.request.body.avatar;
+        site.f_id = ctx.request.body.favoritesID;
         site._id = new mongoose.Types.ObjectId();
 
         await addSite(favoritesID, site).then(
-            () => {
+            (response) => {
                 ctx.body = {
                     code: 200,
-                    msg: '添加成功'
+                    msg: '添加成功',
+                    favorite: response
                 };
             },
             (err) => {

@@ -22,6 +22,12 @@ function deleteFavorites(username, _id) {
                     return;
                 }
                 resolve('删除成功')
+                // var whereStr = { type: "en" };  
+                // .deleteMany(whereStr, function(err, obj) {
+                //     if (err) throw err;
+                //     console.log(obj.result.n + " 条文档被删除");
+                //     db.close();
+                // });
                 FavoritesModel.deleteOne({
                     _id: _id
                 }, (err) => {

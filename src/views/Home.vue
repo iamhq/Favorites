@@ -1,36 +1,80 @@
 <template>
-  <div id="home">
-    hhhhhome
+  <div class="main-container" id="home">
+    <!-- <SiteList v-if="hasResult" :sites="sites"></SiteList> -->
+    <div v-if="!user" class="fs-20">
+      <div>请先登录</div>
+      <router-link to="/signin">
+        <Button class="margin-top15" type="info" shape="circle">去登录</Button>
+      </router-link>
+    </div>
+    <div v-if="user">
+      <Layout>
+        <Sider id="home-sider">
+          <Menu id="home-menu" width="200px" theme="dark" :active-name="activeName">
+            <router-link to="favorites">
+              <MenuItem name="favorites">
+                <Icon type="md-document"/>我的收藏夹
+              </MenuItem>
+            </router-link>
+            <router-link to="sites">
+              <MenuItem name="sites">
+                <Icon type="md-chatbubbles"/>我的收藏
+              </MenuItem>
+            </router-link>
+            <router-link to="addSite">
+              <MenuItem name="addSite">
+                <Icon type="md-chatbubbles"/>添加收藏
+              </MenuItem>
+            </router-link>
+          </Menu>
+        </Sider>
+        <Content id="home-content">
+          <router-view></router-view>
+        </Content>
+      </Layout>
+
+      <br>
+    </div>
   </div>
 </template>
 <script>
-
 export default {
   name: "home",
   data() {
     return {
-      test: 213123
+      activeName: "favorites",
+      user: null
     };
   },
-  components: {
-   
+  watch: {
+    $route: "fetchData"
   },
-  created: function() {
-      let params = JSON.stringify({
-      title: "2222",
-      url: "https://github.com/Tang-Seng/Favorites",
-      favoritesID: "5cb2c5905f8d253790dff3c8"
-    })
-    this.$http.post("http://localhost:3011/fs/addSite", params).then(
-      response => {
-        //成功处理
-        console.log("success: ", response);
-      },
-      reject => {
-        //失败处理
-        console.log("failllll: ", reject);
-      }
-    );
+  methods: {
+    fetchData: function() {
+      this.activeName = this.$route.name;
+    }
+  },
+  mounted: function() {
+    this.user = this.globalV.user;
   }
 };
 </script>
+
+<style scoped>
+#home-content {
+  /* padding-left: 100px; */
+  position: fixed;
+  height: 100vh;
+  left: 220px;
+  background: #fff;
+}
+
+#home-sider {
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top:51px;
+  overflow: auto;
+}
+</style>
+

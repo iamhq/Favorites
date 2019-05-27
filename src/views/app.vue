@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import topHead from "./components/common/topHead.vue";
+import topHead from "./components/TopHead.vue";
 
 export default {
   name: "app",
@@ -25,7 +25,7 @@ export default {
 #app-con {
   margin: 0 auto;
   min-width: 1200px;
-  min-height: 100%;
+  height: 100%;
 }
 </style>
 

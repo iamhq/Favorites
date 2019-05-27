@@ -1,17 +1,16 @@
 const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-bodyparser')
 const path = require('path')
-const Config = require('./config/config');
-const onerror = require('koa-error');
+const Config = require('./config/config')
+const onerror = require('koa-error')
+const koabody = require('koa-body')
 var model = require('./model');
-const controller = require('./controller');
+const controller = require('./controller')
 var app = new Koa();
 const isProduction = process.env.NODE_ENV === 'development';
 
-
 // 错误信息处理
 onerror(app);
-
 
 // 控制台打印URL以及页面执行时间：
 app.use(async (ctx, next) => {
@@ -28,13 +27,14 @@ app.use(async (ctx, next) => {
 if (!isProduction) {
   let staticFiles = require('./static-files');
   app.use(staticFiles('/dist/', path.resolve(__dirname, '../dist')));
-  app.use(staticFiles('/assets/', path.resolve(__dirname, '../assets')));
+  // app.use(staticFiles('/assets/', path.resolve(__dirname, '../assets')));
+  app.use(staticFiles('/uploads/', path.resolve(__dirname, '../assets/images/uploads')));
 }
 
 // 解析POST请求：,响应json
 // koa-json中间件，它会自动将我们返回的数据转换为json格式
 // app.use(json());
-// app.use(koabody());
+app.use(koabody({multipart:true}));
 app.use(bodyParser());
 
 // add controllers:

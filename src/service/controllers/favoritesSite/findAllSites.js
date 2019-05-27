@@ -4,7 +4,7 @@ const FavoritesModel = model.FavoritesModel;
 function findAllSites(favorites, index, pageSize, SiteModel) {
     return new Promise((resolve, reject) => {
         let start = (index - 1) * pageSize;
-        let query = FavoritesModel.find(favorites);
+        let query = FavoritesModel.find(favorites)
         query.find().populate({
             path: 'sites'
           ,options: { sort: { name: -1 }, skip: start , limit: pageSize}}).exec((err, docs) => {
@@ -25,8 +25,9 @@ function findAllSites(favorites, index, pageSize, SiteModel) {
 module.exports = {
     'GET /fs/findAllSites': async (ctx, next) => {
         let favorites = {
-            _id: ctx.request.body.favoritesID
+            _id: ctx.query.favoritesID
         }
+        console.log('favorites',favorites);
         let index = ctx.request.body.index;
         let pageSize = ctx.request.body.pageSize;
         await findAllSites(favorites, index, pageSize).then(

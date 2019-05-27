@@ -16,6 +16,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    avatar: {
+        type: String,
+        default: '/assets/images/uploads/default.jpg'
+    },
     follow: {
         type: Array,
         default: []

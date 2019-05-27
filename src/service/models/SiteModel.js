@@ -15,10 +15,14 @@ var siteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // like: {
-    //     type: Number,
-    //     default: 0
-    // }
+    avatar: {
+        type: String,
+        default: '/assets/images/uploads/default.jpg'
+    },
+    f_id: {
+        type: String,
+        // default: '/assets/images/uploads/default.jpg'
+    }
 
 })
 var SiteModel = mongoose.model('SiteModel', siteSchema);

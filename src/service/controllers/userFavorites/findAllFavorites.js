@@ -1,21 +1,32 @@
+/**
+ * 查询某个用户所有收藏夹
+ */
 const model = require('./../../model');
 const UserModel = model.UserModel;
 
 function findALLFavorites(user) {
     return new Promise((resolve, reject) => {
-        UserModel.findOne(user).populate('favorites', 'name', null, {
-            sort: {
-                name: -1
-            }
-        }).exec(function (err, docs) {
+        console.log('user',user)
+        UserModel.findOne(user).exec(function (err, docs) {
+            var opts = [{
+                path: 'favorites',
+                // select : 'title'
+            }];
             if (err) {
                 reject(err);
-            } else {
-                let data = {
-                    list: docs.favorites
-                }
-                resolve(data);
             }
+            docs.populate(opts, function (err, populatedDoc) {
+                console.log(populatedDoc.favorites);
+                if (err) {
+                    reject(err);
+                } else {
+                    let data = {
+                        list: docs.favorites
+                    }
+                    resolve(data);
+                }
+            });
+
 
         })
     });
@@ -24,8 +35,10 @@ function findALLFavorites(user) {
 
 module.exports = {
     'POST /u/findALLFavorites': async (ctx, next) => {
+        console.log('ctx-body',ctx.request.body)
+        let body = ctx.request.body;
         let user = {
-            username: ctx.request.body.username
+            username: body.username
         }
         await findALLFavorites(user).then(
             (data) => {
